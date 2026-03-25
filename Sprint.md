@@ -6,6 +6,10 @@ Divisão de Sprint: Equipe de Desenvolvimento - Projeto: Sell ideas
 
 - DESENVOLVEDOR: GUSTAVO LACERDA
 
+- Na parte de scrum optei por lançar as atribuições conforme outras iam sendo terminadas,
+para não sobrecarregar os devs e ter uma melhor experiencia e entrega da parte deles, o primeiro momento
+foi focado em definir a arquitetura do sistema e modelar o banco de dados, sendo as duas partes mais importantes na minha visão.
+
 Desenvolvedor: ADILSON
 
 Foco: backend, regras de negócio e segurança.
