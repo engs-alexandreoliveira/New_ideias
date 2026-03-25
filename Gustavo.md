@@ -1,15 +1,11 @@
-# ============================================
-# 🚀 PROJETO: NEW IDEIAS (SELL IDEAS)
-# ============================================
+# PROJETO: NEW IDEIAS (SELL IDEAS)
 
-# 📌 DESCRIÇÃO
+# DESCRIÇÃO
 A plataforma New Ideias é um sistema colaborativo onde usuários podem
 compartilhar ideias, interagir com a comunidade e atrair investidores.
 Funciona como um fórum com foco em projetos open-source e negociação.
 
-# ============================================
-# 🧱 ARQUITETURA DO SISTEMA
-# ============================================
+# ARQUITETURA DO SISTEMA
 
 Frontend → API (Node.js) → Backend → Banco de Dados (SQL)
 
@@ -18,9 +14,7 @@ Frontend → API (Node.js) → Backend → Banco de Dados (SQL)
 - Backend: Node.js
 - Banco de Dados: PostgreSQL / MySQL
 
-# ============================================
-# 🔌 1. CONEXÃO COM BANCO DE DADOS
-# ============================================
+# 1. CONEXÃO COM BANCO DE DADOS
 
 Arquivo: backend/config/database.js
 
@@ -43,9 +37,8 @@ module.exports = pool;
 - Validar conexão ao iniciar servidor
 - Separar configuração por ambiente (dev/prod)
 
-# ============================================
-# 🗄️ 2. ESTRUTURA DO BANCO DE DADOS
-# ============================================
+
+# 2. ESTRUTURA DO BANCO DE DADOS
 
 # Tabela: usuarios
 CREATE TABLE usuarios (
@@ -76,9 +69,7 @@ CREATE TABLE transacoes (
   data TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-# ============================================
-# 🔄 3. CRUD DE IDEIAS (BACKEND)
-# ============================================
+# 3. CRUD DE IDEIAS (BACKEND)
 
 # Rotas:
 POST    /ideias        → Criar ideia
@@ -135,9 +126,8 @@ app.delete('/ideias/:id', authMiddleware, async (req, res) => {
 - Validar dados antes de salvar
 - Sanitizar inputs
 
-# ============================================
-# 🔐 4. LOGIN E AUTENTICAÇÃO
-# ============================================
+
+# 4. LOGIN E AUTENTICAÇÃO
 
 # Fluxo:
 1. Usuário envia email e senha
@@ -192,9 +182,8 @@ function authMiddleware(req, res, next) {
   }
 }
 
-# ============================================
-# 🌐 5. INTEGRAÇÃO COM FRONTEND
-# ============================================
+# 5. INTEGRAÇÃO COM FRONTEND
+
 
 fetch('/login', {
   method: 'POST',
@@ -206,9 +195,7 @@ fetch('/login', {
   localStorage.setItem('token', data.token);
 });
 
-# ============================================
 # 🔎 6. SISTEMA DE BUSCA
-# ============================================
 
 app.get('/ideias/busca', async (req, res) => {
   const { termo } = req.query;
@@ -221,9 +208,7 @@ app.get('/ideias/busca', async (req, res) => {
   res.json(result.rows);
 });
 
-# ============================================
-# 💰 7. HISTÓRICO DE TRANSAÇÕES
-# ============================================
+# 7. HISTÓRICO DE TRANSAÇÕES
 
 app.post('/transacoes', async (req, res) => {
   const { ideia_id, investidor_id, valor } = req.body;
@@ -236,29 +221,15 @@ app.post('/transacoes', async (req, res) => {
   res.send("Transacao registrada");
 });
 
-# ============================================
-# 🎯 CONSIDERAÇÕES FINAIS
-# ============================================
+# CONSIDERAÇÕES FINAIS
 
 - Banco de dados é a base do sistema
 - CRUD de ideias é a funcionalidade central
 - Autenticação garante segurança
 - Sistema de busca melhora a experiência do usuário
 
-# ============================================
 # 👨‍💻 EQUIPE
-# ============================================
 
 PO: Alexandre Bonissoni  
 Backend / Scrum Master: Adilson  
 Frontend: Gustavo Lacerda  
-
-# ============================================
-# 📌 STATUS DO PROJETO
-# ============================================
-
-✔ Modelagem do banco de dados  
-✔ Estrutura backend  
-✔ CRUD de ideias  
-✔ Autenticação  
-⚠ Sistema de busca em desenvolvimento  
