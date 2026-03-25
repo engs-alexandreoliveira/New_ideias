@@ -1,4 +1,4 @@
-aqui estão explicadas as funções atribuidas para meu desenvolvimento
+Aqui estão explicadas as funções atribuidas para meu desenvolvimento
 
 
 1. Implementar Histórico de Transações: uma função de backend e banco de dados, 
