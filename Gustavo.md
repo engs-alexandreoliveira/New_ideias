@@ -156,20 +156,3 @@ Pontos críticos:
 PO: Alexandre Bonissoni  
 Backend / Scrum Master: Adilson  
 Frontend: Gustavo Lacerda  
-
-# OBJETIVO FINAL
-
-Entregar uma plataforma funcional com base sólida, permitindo:
-- Cadastro e autenticação de usuários
-- Publicação e gerenciamento de ideias
-- Interação entre usuários e investidores
-- Estrutura preparada para evolução futura
-
-# STATUS DO PROJETO
-
-- Arquitetura definida
-- Banco de dados modelado
-- Wireframes planejados
-- Funcionalidades em desenvolvimento
-
-# FIM DA DOCUMENTAÇÃO
