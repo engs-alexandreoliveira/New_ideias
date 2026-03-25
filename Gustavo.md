@@ -1,26 +1,30 @@
-====================================================
-PROJETO: NEW IDEIAS (SELL IDEAS)
-====================================================
+# ============================================
+# 🚀 PROJETO: NEW IDEIAS (SELL IDEAS)
+# ============================================
 
-DESCRICAO:
-A plataforma New Ideias e um sistema colaborativo onde usuarios podem
+# 📌 DESCRIÇÃO
+A plataforma New Ideias é um sistema colaborativo onde usuários podem
 compartilhar ideias, interagir com a comunidade e atrair investidores.
-O sistema funciona como um forum com foco em projetos open-source
-e negociacao de ideias.
+Funciona como um fórum com foco em projetos open-source e negociação.
 
-====================================================
-ARQUITETURA DO SISTEMA
-====================================================
+# ============================================
+# 🧱 ARQUITETURA DO SISTEMA
+# ============================================
 
-Frontend -> API (Node.js) -> Backend -> Banco de Dados (SQL)
+Frontend → API (Node.js) → Backend → Banco de Dados (SQL)
 
-====================================================
-1. CONEXAO COM BANCO DE DADOS
-====================================================
+# Tecnologias:
+- Frontend: HTML5, CSS3, JavaScript / React
+- Backend: Node.js
+- Banco de Dados: PostgreSQL / MySQL
 
-Arquivo: /backend/config/database.js
+# ============================================
+# 🔌 1. CONEXÃO COM BANCO DE DADOS
+# ============================================
 
-CODIGO:
+Arquivo: backend/config/database.js
+
+Código:
 
 const { Pool } = require('pg');
 
@@ -34,17 +38,16 @@ const pool = new Pool({
 
 module.exports = pool;
 
+# Boas práticas:
+- Utilizar variáveis de ambiente (.env)
+- Validar conexão ao iniciar servidor
+- Separar configuração por ambiente (dev/prod)
 
-OBS:
-- Utilizar arquivo .env para credenciais
-- Testar conexao ao iniciar servidor
+# ============================================
+# 🗄️ 2. ESTRUTURA DO BANCO DE DADOS
+# ============================================
 
-====================================================
-2. ESTRUTURA DO BANCO DE DADOS
-====================================================
-
-TABELA: usuarios
-
+# Tabela: usuarios
 CREATE TABLE usuarios (
   id SERIAL PRIMARY KEY,
   nome VARCHAR(100),
@@ -54,9 +57,7 @@ CREATE TABLE usuarios (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
-TABELA: ideias
-
+# Tabela: ideias
 CREATE TABLE ideias (
   id SERIAL PRIMARY KEY,
   titulo VARCHAR(255),
@@ -66,9 +67,7 @@ CREATE TABLE ideias (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
-TABELA: transacoes
-
+# Tabela: transacoes
 CREATE TABLE transacoes (
   id SERIAL PRIMARY KEY,
   ideia_id INT,
@@ -77,23 +76,20 @@ CREATE TABLE transacoes (
   data TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-====================================================
-3. CRUD DE IDEIAS (BACKEND)
-====================================================
+# ============================================
+# 🔄 3. CRUD DE IDEIAS (BACKEND)
+# ============================================
 
-ROTAS:
+# Rotas:
+POST    /ideias        → Criar ideia
+GET     /ideias        → Listar ideias
+GET     /ideias/:id    → Buscar ideia
+PUT     /ideias/:id    → Atualizar ideia
+DELETE  /ideias/:id    → Deletar ideia
 
-POST    /ideias        -> Criar ideia
-GET     /ideias        -> Listar ideias
-GET     /ideias/:id    -> Buscar ideia
-PUT     /ideias/:id    -> Atualizar ideia
-DELETE  /ideias/:id    -> Deletar ideia
+# Implementação:
 
-
-EXEMPLO DE IMPLEMENTACAO:
-
-CRIAR IDEIA:
-
+## Criar Ideia
 app.post('/ideias', authMiddleware, async (req, res) => {
   const { titulo, descricao, categoria } = req.body;
   const userId = req.user.id;
@@ -106,17 +102,13 @@ app.post('/ideias', authMiddleware, async (req, res) => {
   res.json(result.rows[0]);
 });
 
-
-LISTAR IDEIAS:
-
+## Listar Ideias
 app.get('/ideias', async (req, res) => {
   const result = await pool.query('SELECT * FROM ideias');
   res.json(result.rows);
 });
 
-
-ATUALIZAR IDEIA:
-
+## Atualizar Ideia
 app.put('/ideias/:id', authMiddleware, async (req, res) => {
   const { id } = req.params;
   const { titulo, descricao } = req.body;
@@ -129,9 +121,7 @@ app.put('/ideias/:id', authMiddleware, async (req, res) => {
   res.send("Atualizado");
 });
 
-
-DELETAR IDEIA:
-
+## Deletar Ideia
 app.delete('/ideias/:id', authMiddleware, async (req, res) => {
   const { id } = req.params;
 
@@ -140,25 +130,23 @@ app.delete('/ideias/:id', authMiddleware, async (req, res) => {
   res.send("Deletado");
 });
 
-
-REGRAS:
-- Apenas o dono da ideia pode editar/deletar
+# Regras de negócio:
+- Apenas o criador pode editar/deletar
 - Validar dados antes de salvar
 - Sanitizar inputs
 
-====================================================
-4. LOGIN E AUTENTICACAO
-====================================================
+# ============================================
+# 🔐 4. LOGIN E AUTENTICAÇÃO
+# ============================================
 
-FLUXO:
-1. Usuario envia email e senha
+# Fluxo:
+1. Usuário envia email e senha
 2. Backend valida credenciais
-3. Gera token JWT
+3. Geração de token JWT
 4. Frontend armazena token
-5. Token e enviado nas requisicoes
+5. Token enviado nas requisições protegidas
 
-CODIGO LOGIN:
-
+# Código de Login:
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
@@ -189,9 +177,7 @@ app.post('/login', async (req, res) => {
   res.json({ token });
 });
 
-
-MIDDLEWARE DE AUTENTICACAO:
-
+# Middleware de Autenticação:
 function authMiddleware(req, res, next) {
   const token = req.headers.authorization;
 
@@ -206,11 +192,9 @@ function authMiddleware(req, res, next) {
   }
 }
 
-====================================================
-5. INTEGRACAO COM FRONTEND (LOGIN)
-====================================================
-
-CODIGO:
+# ============================================
+# 🌐 5. INTEGRAÇÃO COM FRONTEND
+# ============================================
 
 fetch('/login', {
   method: 'POST',
@@ -222,11 +206,9 @@ fetch('/login', {
   localStorage.setItem('token', data.token);
 });
 
-====================================================
-6. SISTEMA DE BUSCA
-====================================================
-
-Rota com filtro por texto:
+# ============================================
+# 🔎 6. SISTEMA DE BUSCA
+# ============================================
 
 app.get('/ideias/busca', async (req, res) => {
   const { termo } = req.query;
@@ -239,11 +221,9 @@ app.get('/ideias/busca', async (req, res) => {
   res.json(result.rows);
 });
 
-====================================================
-7. HISTORICO DE TRANSACOES
-====================================================
-
-Registro de investimentos:
+# ============================================
+# 💰 7. HISTÓRICO DE TRANSAÇÕES
+# ============================================
 
 app.post('/transacoes', async (req, res) => {
   const { ideia_id, investidor_id, valor } = req.body;
@@ -256,11 +236,29 @@ app.post('/transacoes', async (req, res) => {
   res.send("Transacao registrada");
 });
 
-====================================================
-8. CONSIDERACOES FINAIS
-====================================================
+# ============================================
+# 🎯 CONSIDERAÇÕES FINAIS
+# ============================================
 
-- Banco de dados e prioridade critica
-- CRUD e funcionalidade principal
-- Autenticacao garante seguranca
-- Busca melhora experiencia do usuario
+- Banco de dados é a base do sistema
+- CRUD de ideias é a funcionalidade central
+- Autenticação garante segurança
+- Sistema de busca melhora a experiência do usuário
+
+# ============================================
+# 👨‍💻 EQUIPE
+# ============================================
+
+PO: Alexandre Bonissoni  
+Backend / Scrum Master: Adilson  
+Frontend: Gustavo Lacerda  
+
+# ============================================
+# 📌 STATUS DO PROJETO
+# ============================================
+
+✔ Modelagem do banco de dados  
+✔ Estrutura backend  
+✔ CRUD de ideias  
+✔ Autenticação  
+⚠ Sistema de busca em desenvolvimento  
