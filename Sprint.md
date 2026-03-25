@@ -1,6 +1,6 @@
 Divisão de Sprint: Equipe de Desenvolvimento - Projeto: Sell ideas
 
-- PO: ALEXADRE BONISSONI
+- PO: ALEXANDRE BONISSONI
 
 - SCRUM MASTER E DEV: ADILSON
 
