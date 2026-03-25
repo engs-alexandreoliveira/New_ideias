@@ -1,5 +1,3 @@
-# Backlog
-
 # Tasks designadas ao backlog
 
 - Criação de sistema de "Gostei/ Não gostei"  
