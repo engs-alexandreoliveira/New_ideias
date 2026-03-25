@@ -1,6 +1,6 @@
 # Backlog
 
-- Tasks designadas ao backlog
+# Tasks designadas ao backlog
 
 - Criação de sistema de "Gostei/ Não gostei"  
   Permite que os users avaliem o conteúdo publicado
